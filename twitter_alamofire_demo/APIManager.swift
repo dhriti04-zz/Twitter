@@ -88,8 +88,9 @@ class APIManager: SessionManager {
             let tweetDictionaries = NSKeyedUnarchiver.unarchiveObject(with: data) as! [[String: Any]]
             let tweets = tweetDictionaries.flatMap({ (dictionary) -> Tweet in
                 Tweet(dictionary: dictionary)
+                
             })
-
+            print (tweetDictionaries)
             completion(tweets, nil)
             return
         }
