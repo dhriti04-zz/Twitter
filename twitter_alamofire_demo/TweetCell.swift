@@ -53,22 +53,40 @@ class TweetCell: UITableViewCell {
     
     @IBAction func didTapToFavorite(_ sender: Any) {
         tweet.favorited = true
-        tweet.favoriteCount += 1
-         
-        favButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
-        
-        
-        favButton.setTitle(String(tweet.favoriteCount), for: UIControlState.normal )
-        
         APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
+            
             if let  error = error {
                 print("Error favoriting tweet: \(error.localizedDescription)")
+            
             } else if let tweet = tweet {
                 print("Successfully favorited the following Tweet: \n\(tweet.text)")
+                tweet.favoriteCount += 1
+                
+                self.favButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
+                self.favButton.setTitle(String(describing: tweet.favoriteCount), for: UIControlState.normal )
+                
             }
         }
         
-        
+    }
+    
+    
+    @IBAction func didTapToRetweet(_ sender: Any) {
+        tweet.retweeted = true
+        APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
+            
+            if let  error = error {
+                print("Error retweeting tweet: \(error.localizedDescription)")
+             
+            } else if let tweet = tweet {
+                print("Successfully retweeted the following Tweet: \n\(tweet.text)")
+                tweet.retweetCount += 1
+                
+                self.retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: UIControlState.normal)
+                self.retweetButton.setTitle(String(describing: tweet.retweetCount), for: UIControlState.normal )
+                
+            }
+        }
     }
     
     
