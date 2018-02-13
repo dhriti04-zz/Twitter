@@ -29,6 +29,21 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
+        //navigationController?.navigationItem.title =  "Home"
+        
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+                
+            } else if let error = error {
+                print("Error getting home timeline: " + error.localizedDescription)
+            }
+        }
+    }
+    
+    func getData() {
         APIManager.shared.getHomeTimeLine { (tweets, error) in
             if let tweets = tweets {
                 self.tweets = tweets
@@ -58,7 +73,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
-        self.viewDidLoad()
+        self.getData()
     }
     
     override func didReceiveMemoryWarning() {
