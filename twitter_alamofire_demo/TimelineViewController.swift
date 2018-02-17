@@ -11,6 +11,12 @@ import UIKit
 
 
 class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeNewTweetViewControllerDelegate {
+    
+    
+    func did(post: Tweet) {
+        print ("REALLY ?")
+    }
+    
   
     
 
@@ -97,13 +103,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
   
-        if let cell = sender as! UITableViewCell {
+        if let cell = sender as? UITableViewCell {
             // Get the new view controller using segue.destinationViewController.
             let vc = segue.destination as! TweetDetailViewController
             let indexPath = tableView.indexPath(for: cell)!
             // Pass the selected object to the new view controller.
             let tweet = tweets[indexPath.row]
-            vc.userTweet = tweet
+            vc.tweet = tweet
             
         }
         

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AlamofireImage
 
 class TweetCell: UITableViewCell {
     
@@ -93,7 +92,7 @@ class TweetCell: UITableViewCell {
                 
                 if let  error = error {
                     print("Error favoriting tweet: \(error.localizedDescription)")
-                    
+                
                 } else if let tweet = tweet {
                     print("Successfully unfavorited the following Tweet: \n\(tweet.text)")
                     }

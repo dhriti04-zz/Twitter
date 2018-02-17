@@ -20,6 +20,8 @@ class User {
     var profileImage: URL?
     var followingCount: Int?
     var followersCount: Int?
+    var totalTweets : Int?
+
     
     init(dictionary: [String: Any]) {
         self.dictionary = dictionary
@@ -30,6 +32,9 @@ class User {
         profileImage = URL(string: profile!)
         followingCount = dictionary["friends_count"] as? Int
         followersCount = dictionary["followers_count"] as? Int
+        totalTweets = dictionary["statuses_count"] as? Int
+    
+     
 
     }
     
