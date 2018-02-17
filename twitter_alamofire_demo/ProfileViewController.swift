@@ -16,20 +16,30 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var Username: UILabel!
     @IBOutlet weak var ScreenName: UILabel!
     
-    @IBOutlet weak var userPhoto: UIImageView!
+    @IBOutlet weak var numFollowers: UILabel!
+    @IBOutlet weak var numFollowing: UILabel!
     
-    var currUser: User! {
-        didSet {
-            Username.text = currUser.name
-            ScreenName.text = "@" + currUser.screenName!
-            userPhoto.af_setImage(withURL: currUser.profileImage!)
-        }
-    }
+    @IBOutlet weak var userPhoto: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        APIManager.shared.getCurrentAccount(completion: { (user, error) in
+            if let error = error {
+                print("HUH? ERROR ----------------")
+                print (error)
+            } else if let user = user {
+                print("This is \(user.name)'s profile")
+                self.ScreenName.text = user.screenName
+                self.Username.text = "@" + user.name
+                self.userPhoto.af_setImage(withURL: user.profileImage!)
+                self.numFollowers.text = "\(user.followersCount!)"
+                self.numFollowing.text = "\(user.followingCount!)"
+                print ("\(user.followingCount)... \(user.followersCount)" )
+                
+            }
+        })
     }
 
     

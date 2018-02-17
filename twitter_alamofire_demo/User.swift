@@ -18,6 +18,8 @@ class User {
     var screenName: String?
     var profile: String?
     var profileImage: URL?
+    var followingCount: Int?
+    var followersCount: Int?
     
     init(dictionary: [String: Any]) {
         self.dictionary = dictionary
@@ -26,6 +28,8 @@ class User {
         screenName = dictionary["screen_name"] as? String
         profile = dictionary["profile_image_url_https"] as? String
         profileImage = URL(string: profile!)
+        followingCount = dictionary["friends_count"] as? Int
+        followersCount = dictionary["followers_count"] as? Int
 
     }
     

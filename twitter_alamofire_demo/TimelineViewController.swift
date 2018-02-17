@@ -8,8 +8,12 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeNewTweetViewControllerDelegate {
+  
     
+
     var tweets: [Tweet] = []
     var refreshControl: UIRefreshControl!
     
@@ -87,14 +91,23 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+  
+        if let cell = sender as! UITableViewCell {
+            // Get the new view controller using segue.destinationViewController.
+            let vc = segue.destination as! TweetDetailViewController
+            let indexPath = tableView.indexPath(for: cell)!
+            // Pass the selected object to the new view controller.
+            let tweet = tweets[indexPath.row]
+            vc.userTweet = tweet
+            
+        }
+        
      }
-     */
+    
     
 }
